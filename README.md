@@ -22,7 +22,7 @@ Before using this module, you'll need to generate a key pair for your server and
 |`vpc_id`|`string`|Yes|The VPC ID in which Terraform will launch the resources.|
 |`ami_id`|`string`|No. Defaults to Ubuntu 16.04 AMI in us-east-1|The AMI ID to use.|
 |`env`|`string`|No. Defaults "prod"|The name of environment for WireGuard. Used to differentiate multiple deployments.|
-|`wg_client_public_keys`|`list`|Yes.|List of maps of client IPs and public keys. See Usage for details.|
+|`wg_client_public_keys`|`map(object({ip = string, pub_key = string}))`|Yes.|List of maps of client IPs and public keys. See Usage for details.|
 
 ## Usage
 ```
@@ -32,9 +32,9 @@ module "wireguard" {
   vpc_id            = "vpc-01234567"
   public_subnet_ids = ["subnet-01234567"]
   wg_client_public_keys = [
-    {"192.168.2.2/32" = "QFX/DXxUv56mleCJbfYyhN/KnLCrgp7Fq2fyVOk/FWU="},
-    {"192.168.2.3/32" = "+IEmKgaapYosHeehKW8MCcU65Tf5e4aXIvXGdcUlI0Q="},
-    {"192.168.2.4/32" = "WO0tKrpUWlqbl/xWv6riJIXipiMfAEKi51qvHFUU30E="},
+    { ip = "192.168.2.2/32", pub_key = "QFX/DXxUv56mleCJbfYyhN/KnLCrgp7Fq2fyVOk/FWU="},
+    { ip = "192.168.2.3/32", pub_key = "+IEmKgaapYosHeehKW8MCcU65Tf5e4aXIvXGdcUlI0Q="},
+    { ip = "192.168.2.4/32", pub_key = "WO0tKrpUWlqbl/xWv6riJIXipiMfAEKi51qvHFUU30E="},
   ]
 }
 ```
