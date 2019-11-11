@@ -16,6 +16,11 @@ variable "public_subnet_ids" {
   description = "A list of subnets for the Autoscaling Group to use for launching instances. May be a single subnet, but it must be an element in a list."
 }
 
+#variable "wg_instance_private_ip" {
+#  type        = string
+#  description = "Private IP address of the wg instance."
+#}
+
 variable "wg_client_public_keys" {
   type        = list(object({
     ip = string

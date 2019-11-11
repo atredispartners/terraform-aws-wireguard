@@ -11,9 +11,17 @@ resource "aws_security_group" "sg_wireguard_external" {
   }
 
   ingress {
-    from_port   = 51820
-    to_port     = 51820
+    from_port   = 443 #51820
+    to_port     = 443 #51820
     protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # TODO: remove
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

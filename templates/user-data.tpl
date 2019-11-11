@@ -13,7 +13,8 @@ write_files:
       [Interface]
       Address = 192.168.2.1
       PrivateKey = ${wg_server_private_key}
-      ListenPort = 51820
+      ListenPort = 443
+      #ListenPort = 51820
       PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
       PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 
@@ -27,7 +28,7 @@ runcmd:
   - sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
   - sysctl -p
   - ufw allow ssh
-  - ufw allow 51820/udp
+  - ufw allow 443/udp
   - ufw --force enable
   - systemctl enable wg-quick@wg0.service
   - systemctl start wg-quick@wg0.service
